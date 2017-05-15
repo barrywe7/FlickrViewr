@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="image_size">200dp</dimen>
+    <dimen name="key_line">16dp</dimen>
+    <dimen name="key_line_half">8dp</dimen>
+    <dimen name="empty_state_padding">64dp</dimen>
+</resources>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.barryirvine.flickr.viewmodel.FlickrPhotoViewModel"/>
+
+        <variable
+            name="picasso"
+            type="com.squareup.picasso.Picasso"/>
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foreground="?selectableItemBackground"
+            android:onClick="@{() -> viewModel.onClick(image)}"
+            android:orientation="vertical">
+            <com.barryirvine.flickr.ui.view.SquareLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:imageUrl="@{viewModel.imageUrl}"
+                    app:picasso="@{picasso}"/>
+            </com.barryirvine.flickr.ui.view.SquareLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/key_line_half"
+                android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.title}"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                tools:text="Title"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.description}"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:autoLink="web"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="Title"/>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</layout>
