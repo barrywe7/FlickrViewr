@@ -7,7 +7,7 @@ The Flickr Viewr app was undertaken as part of a recruitment exercise
  - Unit tests can be run from within Android Studio
  - There are no instrumentation tests at present
 ## Code Architecture
- - The app is a standard single Activity Android project containing a Fragment to display the content (using a Fragment allows the possibility to have a master-detail view for tablets).
+ - The app is a standard Android project with a single launcher activity a Fragment to display the content (using a Fragment allows the possibility to have a master-detail view for tablets).
  - The content and position of the recyclerview is saved to the instance state when the fragment is recreated to save unnecessary calls to the network when performing rotations or restoring the activity.
  - Differing content is shown in portrait and landscape mode.
  - An (unthemed) swipe to refresh layout allows new data to be returned from the network.
@@ -17,6 +17,7 @@ The Flickr Viewr app was undertaken as part of a recruitment exercise
  - This data is then mapped in the adapter using data binding.
  - Picasso is used to load the images supplied by FlickrAPI. This also uses an LRU cache to store the images. 
  - The Android data binding library is used to bind the views. Dagger 2 is used for Dependency Injection.
+ - Selecting one of the items in the list will launch a basic detail activity with a (slightly unoptimised) shared transition element animtation
 ### Design patterns used
  - MVP (but also confusingly MVVM). Most companies use MVP because it is more established but I prefer MVVM. Normally only one of the two would be used.
  - Dependency Injection
