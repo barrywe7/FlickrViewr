@@ -14,7 +14,6 @@ import com.barryirvine.flickr.App;
 import com.barryirvine.flickr.R;
 import com.barryirvine.flickr.databinding.FragmentPhotosBinding;
 import com.barryirvine.flickr.model.local.FlickrPhoto;
-import com.barryirvine.flickr.model.server.Photo;
 import com.barryirvine.flickr.ui.adapter.PhotosAdapter;
 import com.barryirvine.flickr.ui.contract.MainContracts;
 import com.squareup.picasso.Picasso;
@@ -82,7 +81,7 @@ public class PhotoFragment extends Fragment implements MainContracts.View {
         super.onViewCreated(view, savedInstanceState);
         mBinding = DataBindingUtil.bind(view);
         if (savedInstanceState == null) {
-            mAdapter = new PhotosAdapter(Collections.<FlickrPhoto>emptyList(), mPicasso);
+            mAdapter = new PhotosAdapter(Collections.emptyList(), mPicasso);
             mBinding.recyclerView.setAdapter(mAdapter);
         } else {
             mBinding.recyclerView.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable(Args.RECYCLER_VIEW_STATE));
@@ -106,7 +105,7 @@ public class PhotoFragment extends Fragment implements MainContracts.View {
 
     @Override
     public void showError(final String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), getString(R.string.f_error_retrieving_photos, message), Toast.LENGTH_LONG).show();
     }
 
     @Override

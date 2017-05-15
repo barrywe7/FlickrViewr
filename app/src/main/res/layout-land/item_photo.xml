@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.barryirvine.flickr.viewmodel.PhotoListViewModel"/>
+
+        <variable
+            name="picasso"
+            type="com.squareup.picasso.Picasso"/>
+    </data>
+
+        <com.barryirvine.flickr.ui.view.SquareLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onClick(image)}">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:foreground="?selectableItemBackground"
+                android:layout_gravity="center"
+                app:imageUrl="@{viewModel.imageUrl}"
+                app:picasso="@{picasso}"/>
+        </com.barryirvine.flickr.ui.view.SquareLayout>
+</layout>

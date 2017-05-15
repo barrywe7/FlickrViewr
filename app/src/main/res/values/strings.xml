@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Flickr Viewr</string>
+    <string name="no_title">No title</string>
+    <string name="f_error_retrieving_photos" formatted="false">Error retrieving photos: %1$sd</string>
+    <string name="pub_date">"Publish date: "</string>
+    <string name="date_taken">"Date taken: "</string>
 </resources>

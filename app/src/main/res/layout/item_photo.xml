@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.barryirvine.flickr.viewmodel.FlickrPhotoViewModel"/>
+            type="com.barryirvine.flickr.viewmodel.PhotoListViewModel"/>
 
         <variable
             name="picasso"
@@ -57,10 +57,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.description}"
-                android:maxLines="3"
-                android:ellipsize="end"
-                android:autoLink="web"
+                android:text="@{viewModel.publishedDateAsString}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 tools:text="Title"/>
             </LinearLayout>

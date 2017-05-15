@@ -28,6 +28,7 @@ allprojects {
         daggerVersion = '2.10'
         butterKnifeVersion = '8.5.1'
         retrofitVersion = '2.2.0'
+        okHttpVersion = '3.6.0'
     }
 }
 

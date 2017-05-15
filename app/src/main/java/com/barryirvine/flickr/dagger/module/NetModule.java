@@ -74,7 +74,8 @@ public class NetModule {
 	@Provides
 	@Singleton
 	Picasso providePicasso(final Application application, final OkHttp3Downloader downloader) {
-		return new Picasso.Builder(application).indicatorsEnabled(true).downloader(downloader).build();
+		// Use indicators enabled here to check caching when required
+		return new Picasso.Builder(application).downloader(downloader).build();
 
 	}
 

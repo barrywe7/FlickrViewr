@@ -3,4 +3,5 @@
     <dimen name="key_line">16dp</dimen>
     <dimen name="key_line_half">8dp</dimen>
     <dimen name="empty_state_padding">64dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

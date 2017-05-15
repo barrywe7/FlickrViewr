@@ -19,4 +19,12 @@ public class DataBindingUtils {
                 .into(view);
     }
 
+    @BindingAdapter({"largeImageUrl", "picasso"})
+    public static void loadLargeImage(@NonNull final ImageView view, @NonNull final String largeImageUrl, @NonNull final Picasso picasso) {
+        picasso.load(largeImageUrl)
+                .fit()
+                .noFade()
+                .into(view);
+    }
+
 }

@@ -1,9 +1,11 @@
 package com.barryirvine.flickr.ui.presenter;
 
 import com.barryirvine.flickr.interactors.InteractorContracts;
+import com.barryirvine.flickr.model.local.FlickrPhoto;
 import com.barryirvine.flickr.ui.contract.MainContracts;
 
-import io.reactivex.functions.Consumer;
+import java.util.Collections;
+import java.util.List;
 
 public class MainPresenter implements MainContracts.Presenter {
 
@@ -12,6 +14,9 @@ public class MainPresenter implements MainContracts.Presenter {
     private boolean loading;
 
     private MainContracts.View mView;
+
+    private List<FlickrPhoto> mPendingResult = Collections.emptyList();
+    private String mPendingError = "";
 
 
     public MainPresenter(final InteractorContracts.PhotoApi photoApi) {
@@ -22,6 +27,13 @@ public class MainPresenter implements MainContracts.Presenter {
     public void attachView(final MainContracts.View view) {
         mView = view;
         mView.onLoading(loading);
+        if (!mPendingError.isEmpty()) {
+            mView.showError(mPendingError);
+            mPendingError = "";
+        } else if (!mPendingResult.isEmpty()) {
+            mView.onDataLoaded(mPendingResult);
+            mPendingResult = Collections.emptyList();
+        }
     }
 
     @Override
@@ -40,16 +52,19 @@ public class MainPresenter implements MainContracts.Presenter {
                         if (photos != null) {
                             mView.onDataLoaded(photos);
                         }
+                    } else {
+                        mPendingResult = photos;
                     }
                 },
                 throwable -> {
                     loading = false;
                     if (mView != null) {
                         mView.onLoading(false);
-                        mView.showError("Error retrieving photos: " + throwable.getMessage());
+                        mView.showError(throwable.getMessage());
+                    } else {
+                        mPendingError = throwable.getMessage();
                     }
                 });
-        ;
     }
 
 }

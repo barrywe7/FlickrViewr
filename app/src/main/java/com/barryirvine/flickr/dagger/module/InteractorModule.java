@@ -1,5 +1,7 @@
 package com.barryirvine.flickr.dagger.module;
 
+import android.content.Context;
+
 import com.barryirvine.flickr.api.FlickrAPI;
 import com.barryirvine.flickr.interactors.PhotoData;
 import com.barryirvine.flickr.interactors.InteractorContracts;
@@ -14,7 +16,7 @@ import dagger.Provides;
 public class InteractorModule {
 	@Provides
 	@Singleton
-	InteractorContracts.PhotoApi providePhotoData(final FlickrAPI flickrAPI, final PhotoResponseMapper mapper) {
-		return new PhotoData(flickrAPI, mapper);
+	InteractorContracts.PhotoApi providePhotoData(final FlickrAPI flickrAPI, final PhotoResponseMapper mapper, final Context context) {
+		return new PhotoData(flickrAPI, mapper, context);
 	}
 }

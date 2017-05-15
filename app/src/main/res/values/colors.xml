@@ -3,5 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <!-- Ensure that click state is normally visible regardless of photo color -->
+    <color name="colorControlHighlight">#44FF4081</color>
+
     <color name="gallery">#EBEBEB</color>
 </resources>

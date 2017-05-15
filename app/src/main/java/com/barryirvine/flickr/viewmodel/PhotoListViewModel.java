@@ -1,5 +1,6 @@
 package com.barryirvine.flickr.viewmodel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
@@ -10,21 +11,26 @@ import android.widget.ImageView;
 
 import com.barryirvine.flickr.model.local.FlickrPhoto;
 import com.barryirvine.flickr.model.server.Photo;
+import com.barryirvine.flickr.ui.UiUtils;
+import com.barryirvine.flickr.ui.activity.PhotoDetailsActivity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * View Model for {@link Photo} Remember to use the {@link Bindable} annotation for all getters and to do
  * {@link #notifyPropertyChanged(int)} after a value is set in a setter.
  */
 
-public class FlickrPhotoViewModel extends BaseObservable {
+public class PhotoListViewModel extends BaseObservable {
 
     private final Context mContext;
     private final FlickrPhoto mPhoto;
 
 
-    public FlickrPhotoViewModel(@NonNull final Context context, final FlickrPhoto photo) {
+    public PhotoListViewModel(@NonNull final Context context, final FlickrPhoto photo) {
         mContext = context;
         mPhoto = photo;
     }
@@ -40,46 +46,11 @@ public class FlickrPhotoViewModel extends BaseObservable {
     }
 
     @Bindable
-    public Date getPublishedDate() {
-        return mPhoto.getPublishedDate();
-    }
-
-    @Bindable
-    public Spanned getDescription() {
-        return Html.fromHtml(mPhoto.getDescription());
+    public String getPublishedDateAsString() {
+        return DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(mPhoto.getPublishedDate());
     }
 
     public void onClick(final ImageView view) {
-        //TODO:
+        PhotoDetailsActivity.start(mContext, mPhoto, UiUtils.getArtworkActivityOptions((Activity) mContext, view));
     }
-
-
-
-
-    /*@Bindable
-    public String getName() {
-        return mBeer.getName();
-    }
-
-    @Bindable
-    public String getDescription() {
-        return mBeer.getDescription();
-    }
-
-    @Bindable
-    public String getAbv() {
-        return String.valueOf(mBeer.getAbv()) +"%";
-    }
-
-    @Bindable
-    public String getTagline() {
-        return mBeer.getTagline();
-    }
-
-
-
-    public void onClick() {
-        // Haven't worked out a safe way of passing the view from view model for use in the shared transitions yet
-        BeerDetailsActivity.start(mContext, mBeer, null);
-    }*/
 }
