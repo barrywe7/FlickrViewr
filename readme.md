@@ -7,7 +7,7 @@ The Flickr Viewr app was undertaken as part of a recruitment exercise
  - Unit tests can be run from within Android Studio
  - There are no instrumentation tests at present
 ## Code Architecture
- - The app is a standard Android project with a single launcher activity a Fragment to display the content (using a Fragment allows the possibility to have a master-detail view for tablets).
+ - The app is a standard Android project with a single launcher activity and a Fragment to display the content (using a Fragment allows the possibility to have a master-detail view for tablets).
  - The content and position of the recyclerview is saved to the instance state when the fragment is recreated to save unnecessary calls to the network when performing rotations or restoring the activity.
  - Differing content is shown in portrait and landscape mode.
  - An (unthemed) swipe to refresh layout allows new data to be returned from the network.
@@ -28,8 +28,9 @@ The Flickr Viewr app was undertaken as part of a recruitment exercise
  - Retrofit 2
  - Picasso
  - OkHttp 3
+ - RetroLamda (once Android Studio 2.4 is live this should not be necessary).
  - Android support library (design and cardview)
-
+ 
 ## Future Enhancements:
  - Allow ability to search for images by tag
  - Allow ability to order by date taken or date published
@@ -43,3 +44,4 @@ The Flickr Viewr app was undertaken as part of a recruitment exercise
  - Add Night/Day themes
  - Introduce pagination of responses
  - Add translations
+ - Improve shared element transitions so that the image doesn't move around when returning to the main activity.
