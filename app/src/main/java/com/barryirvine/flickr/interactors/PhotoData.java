@@ -33,5 +33,4 @@ public class PhotoData implements InteractorContracts.PhotoApi {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
-
 }

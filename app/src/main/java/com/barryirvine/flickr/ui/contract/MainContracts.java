@@ -23,5 +23,9 @@ public interface MainContracts {
 
         void loadData();
 
+        void setClicksEnabled(final boolean enabled);
+
+        boolean areClicksEnabled();
+
     }
 }

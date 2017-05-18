@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.barryirvine.flickr.BR;
 import com.barryirvine.flickr.R;
 import com.barryirvine.flickr.model.local.FlickrPhoto;
+import com.barryirvine.flickr.ui.contract.MainContracts;
 import com.barryirvine.flickr.viewmodel.PhotoListViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -20,10 +21,13 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.ViewHolder
 
     private final List<FlickrPhoto> mItems;
     private final Picasso mPicasso;
+    private MainContracts.Presenter mPresenter;
 
-    public PhotosAdapter(final List<FlickrPhoto> items, final Picasso picasso) {
+    public PhotosAdapter(final List<FlickrPhoto> items, final Picasso picasso, final MainContracts.Presenter presenter) {
         mItems = items;
         mPicasso = picasso;
+        mPresenter = presenter;
+
     }
 
     public List<FlickrPhoto> getItems() {
@@ -43,7 +47,7 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        holder.bind(new PhotoListViewModel(holder.itemView.getContext(), mItems.get(position)));
+        holder.bind(new PhotoListViewModel(holder.itemView.getContext(), mItems.get(position), mPresenter));
     }
 
     @Override

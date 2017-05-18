@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,12 +82,12 @@ public class PhotoFragment extends Fragment implements MainContracts.View {
         super.onViewCreated(view, savedInstanceState);
         mBinding = DataBindingUtil.bind(view);
         if (savedInstanceState == null) {
-            mAdapter = new PhotosAdapter(Collections.emptyList(), mPicasso);
+            mAdapter = new PhotosAdapter(Collections.emptyList(), mPicasso, mPresenter);
             mBinding.recyclerView.setAdapter(mAdapter);
         } else {
             mBinding.recyclerView.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable(Args.RECYCLER_VIEW_STATE));
             final ArrayList<FlickrPhoto> list = savedInstanceState.getParcelableArrayList(Args.PHOTOS);
-            mAdapter = new PhotosAdapter(list, mPicasso);
+            mAdapter = new PhotosAdapter(list, mPicasso, mPresenter);
             mBinding.recyclerView.setAdapter(mAdapter);
         }
         mBinding.swipeRefreshLayout.setOnRefreshListener(this);
@@ -99,7 +100,9 @@ public class PhotoFragment extends Fragment implements MainContracts.View {
 
     @Override
     public void onDataLoaded(final List<FlickrPhoto> photos) {
-        mAdapter = new PhotosAdapter(photos, mPicasso);
+        mAdapter = new PhotosAdapter(photos, mPicasso, mPresenter);
+        // Shouldn't have to do this - it's defined in XML but there looks to be a bug with SGLM when doing pull to refresh
+        mBinding.recyclerView.setLayoutManager(new StaggeredGridLayoutManager(getResources().getInteger(R.integer.feed_grid_columns), StaggeredGridLayoutManager.VERTICAL));
         mBinding.recyclerView.setAdapter(mAdapter);
     }
 

@@ -11,7 +11,8 @@ public class MainPresenter implements MainContracts.Presenter {
 
     private final InteractorContracts.PhotoApi mPhotoApi;
 
-    private boolean loading;
+    private boolean mLoading;
+    private boolean mItemsClickable;
 
     private MainContracts.View mView;
 
@@ -25,8 +26,9 @@ public class MainPresenter implements MainContracts.Presenter {
 
     @Override
     public void attachView(final MainContracts.View view) {
+        setClicksEnabled(true);
         mView = view;
-        mView.onLoading(loading);
+        mView.onLoading(mLoading);
         if (!mPendingError.isEmpty()) {
             mView.showError(mPendingError);
             mPendingError = "";
@@ -43,28 +45,39 @@ public class MainPresenter implements MainContracts.Presenter {
 
     @Override
     public void loadData() {
-        loading = true;
-        mPhotoApi.getPhotos().subscribe(
-                photos -> {
-                    loading = false;
-                    if (mView != null) {
-                        mView.onLoading(false);
-                        if (photos != null) {
-                            mView.onDataLoaded(photos);
-                        }
-                    } else {
-                        mPendingResult = photos;
-                    }
-                },
-                throwable -> {
-                    loading = false;
-                    if (mView != null) {
-                        mView.onLoading(false);
-                        mView.showError(throwable.getMessage());
-                    } else {
-                        mPendingError = throwable.getMessage();
-                    }
-                });
+        mLoading = true;
+        mPhotoApi.getPhotos().subscribe(this::onReceivedPhotos, this::onError);
     }
 
+    private void onReceivedPhotos(final List<FlickrPhoto> photos) {
+        mLoading = false;
+        if (mView != null) {
+            mView.onLoading(false);
+            if (photos != null) {
+                mView.onDataLoaded(photos);
+            }
+        } else {
+            mPendingResult = photos;
+        }
+    }
+
+    private void onError(final Throwable throwable) {
+        mLoading = false;
+        if (mView != null) {
+            mView.onLoading(false);
+            mView.showError(throwable.getMessage());
+        } else {
+            mPendingError = throwable.getMessage();
+        }
+    }
+
+    @Override
+    public void setClicksEnabled(final boolean enabled) {
+        mItemsClickable = enabled;
+    }
+
+    @Override
+    public boolean areClicksEnabled() {
+        return mItemsClickable;
+    }
 }

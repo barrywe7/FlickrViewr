@@ -12,6 +12,7 @@ import com.barryirvine.flickr.R;
 import com.barryirvine.flickr.model.local.FlickrPhoto;
 import com.barryirvine.flickr.model.server.Photo;
 import com.barryirvine.flickr.ui.activity.PhotoDetailsActivity;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 
@@ -24,11 +25,18 @@ public class PhotoDetailsViewModel extends BaseObservable {
 
     private final Context mContext;
     private final FlickrPhoto mPhoto;
+    private final Picasso mPicasso;
 
 
-    public PhotoDetailsViewModel(@NonNull final Context context, final FlickrPhoto photo) {
+    public PhotoDetailsViewModel(@NonNull final Context context, final FlickrPhoto photo, final Picasso picasso) {
         mContext = context;
         mPhoto = photo;
+        mPicasso = picasso;
+    }
+
+    @Bindable
+    public Picasso getPicasso() {
+        return mPicasso;
     }
 
     @Bindable

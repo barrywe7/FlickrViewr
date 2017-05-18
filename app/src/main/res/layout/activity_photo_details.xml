@@ -11,8 +11,8 @@
             type="com.barryirvine.flickr.viewmodel.PhotoDetailsViewModel"/>
 
         <variable
-            name="picasso"
-            type="com.squareup.picasso.Picasso"/>
+            name="callback"
+            type="com.squareup.picasso.Callback"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -23,7 +23,7 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+            android:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -31,7 +31,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:title="@{viewModel.title}"
                 android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay"/>
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
         </android.support.design.widget.AppBarLayout>
 
@@ -51,8 +51,9 @@
                 android:transitionName="@string/artwork_transition"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                app:largeImageUrl="@{viewModel.imageUrl}"
-                app:picasso="@{picasso}"/>
+                app:imageUrl="@{viewModel.imageUrl}"
+                app:picasso="@{viewModel.picasso}"
+                app:callback="@{callback}"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
